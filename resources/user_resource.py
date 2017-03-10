@@ -10,6 +10,10 @@ class UserRegister(Resource):
         parser.add_argument(name="password", type=str, location="json")
         body = parser.parse_args()
         name = body["name"]
+        for user_res in User.objects():
+            if user_res.name == name:
+                return {"message": "Username existed!"}
+
         password = body["password"]
         user = User(name=name, password=password)
         user.save()
