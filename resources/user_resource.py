@@ -12,7 +12,7 @@ class UserRegister(Resource):
         name = body["name"]
         for user_res in User.objects():
             if user_res.name == name:
-                return {"message": "Username existed!"}
+                return {"message": "Username existed!"},401
 
         password = body["password"]
         user = User(name=name, password=password)
@@ -34,4 +34,4 @@ class UserLogin(Resource):
             if user_data.name == name:
                 if user_data.password == password:
                     return mlab.item2json(user_data)
-        return {"message": " Username or password doesn't not match"}
+        return {"message": " Username or password doesn't not match"},401
