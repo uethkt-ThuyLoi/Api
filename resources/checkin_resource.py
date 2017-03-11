@@ -19,7 +19,7 @@ class Checkin(Resource):
         for checkin_res in CheckinClass.objects():
             if checkin_res.name==name:
                 if checkin_res.date==date:
-                    return {"message":"data existed"},401
+                    return {"message":"data existed, you only can add 1request/h"},400
         students = body["students"]
         checkin = CheckinClass(name=name, date=date, students=students)
         checkin.save()
